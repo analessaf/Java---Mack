@@ -117,11 +117,11 @@ public class Pedido implements Manipulacao {
         }
         
         return "\n===== Consulta do Pedido =====\n" +
-               "--- Dados do Cliente ---\n" +
+               "---------- Dados do Cliente ----------\n" +
                "Nome: " + this.cliente.getNome() + "\n" +
                "CPF: " + this.cliente.getCpf() + "\n" +
                "Telefone: " + this.cliente.getTelefone() + "\n" +
-               "\n----- Data do Pedido -----\n" +
+               "\n----------- Data do Pedido ----------\n" +
                "Data: " + data.getDia() + "/" + data.getMes() + "/" + data.getAno() + "\n" +
                "\n--------- Produtos Inclusos ---------\n" +
                infoProdutos + // <-- Aqui entra a string do loop
