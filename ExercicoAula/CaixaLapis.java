@@ -5,6 +5,10 @@ public class CaixaLapis extends Produto{
     private boolean colorido;
     private String graduacao;
 
+    public CaixaLapis() {
+        super("", 0);
+    }
+
     public CaixaLapis(String marca, float valor, int quantidade, boolean colorido, String graduacao) {
         super(marca, valor);
         this.quantidade = quantidade;
@@ -39,7 +43,7 @@ public class CaixaLapis extends Produto{
     @Override
     public void cadastro(){
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Digite a marca da caixa de lápis: ");
+        System.out.print("\nDigite a marca da caixa de lápis: ");
         this.setMarca(scanner.nextLine());
 
         System.out.print("Digite o valor da caixa de lápis: ");
@@ -52,12 +56,14 @@ public class CaixaLapis extends Produto{
         this.setColorido(scanner.nextBoolean());
 
         System.out.print("Digite a graduação dos lápis: ");
+        scanner.nextLine();
         this.setGraduacao(scanner.nextLine());
-
-        scanner.close();
+        scanner.nextLine();
     }
+
+    @Override
     public String consulta() {
-        return "\n -------------- Caixa de Lápis ---------------- " +
+        return "---------- Caixa de Lápis -------------" +
                "\nMarca: " + this.getMarca() +
                "\nValor: " + this.getValor() +
                "\nQuantidade: " + this.getQuantidade() +

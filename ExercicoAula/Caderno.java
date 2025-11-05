@@ -6,6 +6,10 @@ public class Caderno extends Produto {
     private String tipo;
     private boolean capaDura;
 
+    public Caderno() {
+        super("", 0);
+    }
+
     public Caderno(String marca, float valor, int qtdfolhas, String tamanho, String tipo, boolean capaDura) {
         super(marca, valor);
         this.qtdfolhas = qtdfolhas;
@@ -38,7 +42,7 @@ public class Caderno extends Produto {
         this.tipo = tipo;
     }
 
-    public boolean isCapaDura() {
+    public boolean getCapaDura() {
         return capaDura;
     }
 
@@ -49,7 +53,7 @@ public class Caderno extends Produto {
     @Override
     public void cadastro() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Digite a marca do caderno: ");
+        System.out.print("\nDigite a marca do caderno: ");
         this.setMarca(scanner.nextLine());
 
         System.out.print("Digite o valor do caderno: ");
@@ -67,17 +71,16 @@ public class Caderno extends Produto {
         System.out.print("O caderno tem capa dura? (true/false): ");
         this.setCapaDura(scanner.nextBoolean());
 
-        scanner.close();
     }
 
     public String consulta() {
-        return "\n -------------- Caderno ---------------- " +
+        return "-------------- Caderno ----------------" +
                "\nMarca: " + this.getMarca() +
                "\nValor: " + this.getValor() +
                "\nQuantidade de Folhas: " + this.getQtdfolhas() +
                "\nTamanho: " + this.getTamanho() +
                "\nTipo: " + this.getTipo() +
-               "\nCapa Dura: " + this.isCapaDura() +
-                "--------------------------------------";
+               "\nCapa Dura: " + this.getCapaDura()  + "\n" +
+                "-----------------------------------";
     }          
 }   

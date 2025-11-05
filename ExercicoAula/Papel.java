@@ -8,6 +8,10 @@ public class Papel extends Produto {
     private int gramatura;
     private boolean pautado;
 
+    public Papel() {
+        super("", 0);
+    }
+
     public Papel(String marca, float valor, String cor, String tipo, float largura, float altura, int gramatura, boolean pautado) {
         super(marca, valor);
         this.cor = cor;
@@ -68,13 +72,14 @@ public class Papel extends Produto {
 
     public void cadastro(){
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Digite a marca do papel: ");
+        System.out.print("\nDigite a marca do papel: ");
         this.setMarca(scanner.nextLine());
 
         System.out.print("Digite o valor do papel: ");
         this.setValor(scanner.nextFloat());
 
         System.out.print("Digite a cor do papel: ");
+        scanner.nextLine();
         this.setCor(scanner.nextLine());
 
         System.out.print("Digite o tipo do papel: ");
@@ -92,11 +97,10 @@ public class Papel extends Produto {
         System.out.print("O papel é pautado? (true/false): ");
         this.setPautado(scanner.nextBoolean());
 
-        scanner.close();
     }
 
     public String consulta(){
-        return "\n -------------- Papel ---------------- " +
+        return "-------------- Papel ---------------- " +
                "\nMarca: " + this.getMarca() +
                "\nValor: " + this.getValor() +
                "\nCor: " + this.getCor() +

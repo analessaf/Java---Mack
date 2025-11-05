@@ -4,14 +4,11 @@ import java.util.Scanner;
 public class Pedido implements Manipulacao {
     private Data data;
     private Cliente cliente;
-    private float totalpedido;
+    private float totalPedido;
     private ArrayList<Produto> produtos;
 
-    public Pedido(Data data, Cliente cliente) {
-        this.data = data;
-        this.cliente = cliente;
+    public Pedido() {
         this.produtos = new ArrayList<>();
-        this.totalpedido = 0;
     }
 
     public Data getData() {
@@ -31,11 +28,11 @@ public class Pedido implements Manipulacao {
     }
 
     public float getTotalpedido() {
-        return totalpedido;
+        return totalPedido;
     }
 
     public void setTotalpedido(float totalpedido) {
-        this.totalpedido = totalpedido;
+        this.totalPedido = totalpedido;
     }
 
     public ArrayList<Produto> getProdutos() {
@@ -49,16 +46,98 @@ public class Pedido implements Manipulacao {
     @Override
     public void cadastro() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Digite a data do pedido (dd mm aaaa): ");
-        
+
+        System.out.println("\n--- Cadastro da Data do Pedido ---");
+        System.out.print("Digite o dia: ");
+        int dia = scanner.nextInt();
+        System.out.print("Digite o mês: ");
+        int mes = scanner.nextInt();
+        System.out.print("Digite o ano: ");
+        int ano = scanner.nextInt();
+        this.data = new Data(dia, mes, ano);
+
+        scanner.nextLine();
+
+        System.out.println("\n----- Cadastro do Cliente -----");
+        System.out.print("Nome: ");
+        String nome = scanner.nextLine();
+        System.out.print("CPF: ");
+        String cpf = scanner.nextLine();
+        System.out.print("Telefone: ");
+        String telefone = scanner.nextLine();
+        this.cliente = new Cliente(nome, cpf, telefone);
+
+
+        boolean continuar = true;
+        while (continuar) {
+            System.out.println("\n----- Cadastro de Produtos -----");
+            System.out.println("1 - Papel");
+            System.out.println("2 - Caixa de Lápis");
+            System.out.println("3 - Caderno");
+            System.out.print("Escolha o tipo de produto: ");
+            int opc = scanner.nextInt();
+            scanner.nextLine();
+
+            Produto p = null;
+
+            switch (opc) {
+                case 1:
+                    p = new Papel();
+                    p.cadastro();
+                    break;
+                case 2:
+                    p = new CaixaLapis();
+                    p.cadastro();
+                    break;
+                case 3:
+                    p = new Caderno();
+                    p.cadastro();
+                    break;
+                default:
+                    System.out.println("Opção inválida!");
+                    continue;
+            }
+
+            produtos.add(p);
+
+            System.out.print("Deseja adicionar outro produto? (s/n): ");
+            String resp = scanner.nextLine();
+            if (resp.equals("n")) continuar = false;
+        }
+        this.calculaTotalPedido();
     }
 
+    @Override
     public String consulta() {
-        return;
+        
+        String infoProdutos = "";
+        for (Produto p : this.produtos) {
+            infoProdutos += p.consulta(); // Chama o consulta() de Papel, Caderno, etc.
+            infoProdutos += "------------------\n";
+        }
+        
+        return "\n===== Consulta do Pedido =====\n" +
+               "--- Dados do Cliente ---\n" +
+               "Nome: " + this.cliente.getNome() + "\n" +
+               "CPF: " + this.cliente.getCpf() + "\n" +
+               "Telefone: " + this.cliente.getTelefone() + "\n" +
+               "\n----- Data do Pedido -----\n" +
+               "Data: " + data.getDia() + "/" + data.getMes() + "/" + data.getAno() + "\n" +
+               "\n--------- Produtos Inclusos ---------\n" +
+               infoProdutos + // <-- Aqui entra a string do loop
+               "\n------------- Total Geral -------------\n" +
+               "Valor Total (com 18% imposto): R$ " + totalPedido + "\n" +
+               "=========================================\n";
+                
     }
 
     public void calculaTotalPedido(){
+        float custoTotal = 0;
+        for (Produto p : this.produtos){
+            custoTotal += p.getValor();
+        }
 
+        this.totalPedido = custoTotal + (custoTotal * 0.18f);
     }
 
 }

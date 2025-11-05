@@ -23,4 +23,6 @@ public abstract class Produto implements Manipulacao {
         this.valor = valor;
     }
 
+    
+
 }
