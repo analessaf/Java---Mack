@@ -112,8 +112,8 @@ public class Pedido implements Manipulacao {
         
         String infoProdutos = "";
         for (Produto p : this.produtos) {
-            infoProdutos += p.consulta(); // Chama o consulta() de Papel, Caderno, etc.
-            infoProdutos += "------------------\n";
+            infoProdutos += p.consulta();
+            infoProdutos += "\n";
         }
         
         return "\n===== Consulta do Pedido =====\n" +

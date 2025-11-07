@@ -81,6 +81,6 @@ public class Caderno extends Produto {
                "\nTamanho: " + this.getTamanho() +
                "\nTipo: " + this.getTipo() +
                "\nCapa Dura: " + this.getCapaDura()  + "\n" +
-                "-----------------------------------";
+                "--------------------------------------";
     }          
 }   

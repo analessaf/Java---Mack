@@ -100,7 +100,7 @@ public class Papel extends Produto {
     }
 
     public String consulta(){
-        return "-------------- Papel ---------------- " +
+        return "-------------- Papel -----------------" +
                "\nMarca: " + this.getMarca() +
                "\nValor: " + this.getValor() +
                "\nCor: " + this.getCor() +
